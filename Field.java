@@ -7,6 +7,10 @@ import java.awt.event.*;
 
 public class Field extends JFrame {
   private static byte[][][] cells = new byte[4][4][7];
+  private static JPanel[][][] gui_cells = new JPanel[4][4][7];
+
+  // Labels to test
+  private static JLabel[][][] label_cells = new JLabel[4][4][7];
 
   public Field () {
     super("Tic-Tactics");
@@ -45,6 +49,26 @@ public class Field extends JFrame {
     container.add(layer4);
   }
 
+  private void update_cells() {
+    for(int i = 0; i < 4; i++) {
+      for(int j = 0; j < 4; j++) {
+        for(int k = 0; k < 7; k++) {
+          if(cells[i][j][k] == 1) {
+            gui_cells[i][j][k].setBackground(Color.BLUE);
+            for (MouseListener ml : gui_cells[i][j][k].getMouseListeners())
+              gui_cells[i][j][k].removeMouseListener(ml);
+          }
+          else if(cells[i][j][k] == 2) {
+            gui_cells[i][j][k].setBackground(Color.RED);
+            for (MouseListener ml : gui_cells[i][j][k].getMouseListeners())
+              gui_cells[i][j][k].removeMouseListener(ml);
+          }
+          label_cells[i][j][k].setText(String.valueOf(cells[i][j][k]));
+        }
+      }
+    }
+  }
+
   // private byte[] about_to_win() {}
   // private byte[] make_move() {}
 
@@ -64,11 +88,11 @@ public class Field extends JFrame {
           cell.setLayout(new BorderLayout());
           cell.setBackground(Color.BLACK);
 
-          // // temporary showing values of cells
-          // JLabel label = new JLabel();
-          // label.setText(String.valueOf(cells[layer][row][col]));
-          // label.setForeground(Color.WHITE);
-          // cell.add(label);
+          // Labels to test
+          JLabel label = new JLabel();
+          label.setText(String.valueOf(cells[layer][row][col]));
+          label.setForeground(Color.WHITE);
+          cell.add(label);
 
           if(cells[layer][row][col] == -1) {
             cell.setBorder(new LineBorder(Color.BLACK));
@@ -80,12 +104,8 @@ public class Field extends JFrame {
               @Override
               public void mouseClicked (MouseEvent e) {
                 cells[layer][row][col] = 1;
+                update_cells();
 
-                // // temp
-                // label.setText(String.valueOf(cells[layer][row][col]));
-
-                cell.removeMouseListener(this);
-                cell.setBackground(Color.BLUE);
                 // if(did_blue_win()) {}
 
                 // coor = make_move();
@@ -100,6 +120,10 @@ public class Field extends JFrame {
             });
           }
 
+          // Labels to test
+          label_cells[layer][row][col] = label;
+
+          gui_cells[layer][row][col] = cell;
           this.add(cell);
         }
       }
