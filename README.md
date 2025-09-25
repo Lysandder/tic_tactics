@@ -18,5 +18,5 @@ javac tic_tactics/Main.java
 
 # Run
 java tic_tactics.Main
-
+```
 At the end of a game, close the window and run the last command again to start a new one.
