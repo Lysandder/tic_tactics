@@ -201,11 +201,27 @@ public class Field extends JFrame {
 
   private class Panel extends JPanel {
     Panel (byte i) { // Gets layer number coordinate (starting from 0)
-      this.setLayout(new GridLayout(4, 7));
+      this.setLayout(new GridLayout(4, 1));
       this.setBackground(Color.BLACK);
       this.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
       for(byte j = 0; j < 4; j++) {
+        JPanel rowPanel = new JPanel(new GridLayout(1, 7));
+        // // play around with the border, to make it look better
+        // if(j == 0) {
+        //   rowPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 32)); 
+        // }
+        // else if(j == 1) {
+        //   rowPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 8)); 
+        // }
+        // else if(j == 2) {
+        //   rowPanel.setBorder(BorderFactory.createEmptyBorder(0, 8, 0, 0)); 
+        // }
+        // else if(j == 3) {
+        //   rowPanel.setBorder(BorderFactory.createEmptyBorder(0, 32, 0, 0)); 
+        // }
+        rowPanel.setBackground(Color.BLACK);
+
         for(byte k = 0; k < 7; k++) {
           final byte layer = i;
           final byte row = j;
@@ -246,8 +262,9 @@ public class Field extends JFrame {
           // label_cells[layer][row][col] = label;
 
           gui_cells[layer][row][col] = cell;
-          this.add(cell);
+          rowPanel.add(cell);
         }
+        this.add(rowPanel);
       }
     }
   }
