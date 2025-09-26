@@ -188,12 +188,24 @@ public class Field extends JFrame {
 
     // first move
     else if (red_max[0] == 0) {
-      if(cells[2][2][2] == EMPTY_CELL) {
-        cells[2][2][2] = RED_CELL;
+      byte random_line = (byte)(Math.random() * 76);
+      byte layer = WinningLines.WINNING_LINES[random_line][0][0];
+      byte row = WinningLines.WINNING_LINES[random_line][0][1];
+      byte col = (byte)(WinningLines.WINNING_LINES[random_line][0][2] + (3 - row));
+
+      if(cells[layer][row][col] == BLUE_CELL) {
+        byte new_random_line = (byte)(Math.random() * 76);
+        while(new_random_line == random_line) {
+          new_random_line = (byte)(Math.random() * 76);
+        }
+        random_line = new_random_line;
       }
-      else if(cells[3][3][3] == EMPTY_CELL) {
-        cells[3][3][3] = RED_CELL;
-      }
+
+      layer = WinningLines.WINNING_LINES[random_line][0][0];
+      row = WinningLines.WINNING_LINES[random_line][0][1];
+      col = (byte)(WinningLines.WINNING_LINES[random_line][0][2] + (3 - row));
+
+      cells[layer][row][col] = RED_CELL;
     }
 
     update_cells();
