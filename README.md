@@ -13,7 +13,7 @@ You need Java (JDK, JRE, JVM) installed on your system to run the game.
 # Clone the repository
 git clone https://github.com/Lysandder/tic_tactics
 
-# Compile
+# Compile WITHOUT moving into the new tic_tactics directory
 javac tic_tactics/Main.java
 
 # Run
